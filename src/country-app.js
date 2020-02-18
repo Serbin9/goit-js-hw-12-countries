@@ -2,11 +2,9 @@ import fetchCountries from './fetch-countries.js';
 import countryListItemsTemplate from './coutry-list-items.hbs';
 import countryItemTemplate from './/country-item.hbs';
 import debounce from 'lodash.debounce';
-// import PNotify from 'pnotify/dist/es/PNotify.js';
 import PNotify from '../node_modules/pnotify/dist/es/PNotify.js';
 import PNotifyButtons from '../node_modules/pnotify/dist/es/PNotifyButtons.js';
 
-// import "../node_modules/pnotify/dist/PNotifyBrightTheme.css";
 
 const refs = {
   searchInput: document.querySelector('.js-country-search'),
