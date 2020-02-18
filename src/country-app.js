@@ -13,7 +13,6 @@ const refs = {
   countriesList: document.querySelector('.js-countries-list'),
   countryContent: document.querySelector('.js-country-content'),
 };
-
 // событие на ввод (инпут)
 refs.searchInput.addEventListener('input', debounce(searchInputHandler, 800));
 
@@ -22,7 +21,7 @@ function searchInputHandler(e) {
 
   fetchCountry(input);
 }
-за
+
 function insertListItems(items) {
   const markup = countryListItemsTemplate(items);
 
@@ -34,7 +33,7 @@ function insertItem(item) {
 
   refs.countryContent.insertAdjacentHTML('afterbegin', markup);
 }
-// очистка 
+// очистка
 function clearList() {
   refs.countriesList.innerHTML = '';
   refs.countryContent.innerHTML = '';
@@ -42,38 +41,39 @@ function clearList() {
 // функция для поиска стран 2-10 1 >10 0 нет совпадений + pnotify
 function checkCountryListLength(country) {
   if (country.length >= 2 && country.length <= 10) {
-    clearList()
+    clearList();
     insertListItems(country);
   } else if (country.length === 1) {
-    clearList()
+    clearList();
     insertItem(country);
   } else if (country.length > 10) {
-    clearList()
+    clearList();
     PNotify.error({
       title: 'Many result!',
       text: 'Too many mathes found. Please enter a more specific query!',
-      delay: 2000
+      delay: 2000,
     });
-    console.log('много результатов')
+    console.log('много результатов');
   } else {
-    clearList()
+    clearList();
     PNotify.error({
       title: 'Oh No!',
-      text: 'Something terrible happenedNo results were found for your request. Please enter valid data!.',
-      delay: 2000
+      text:
+        'Something terrible happenedNo results were found for your request. Please enter valid data!.',
+      delay: 2000,
     });
-    console.log("ВВедите значение")
+    console.log('ВВедите значение');
   }
 }
 
 function fetchCountry(countryName) {
   clearList();
 
-  if(countryName === '') {
+  if (countryName === '') {
     return;
   }
 
   fetchCountries(countryName)
     .then(countries => checkCountryListLength(countries))
-    .catch(error => console.warn(error));
+    .catch(error => console.log(error));
 }
